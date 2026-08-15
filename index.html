@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #1e1e2f;
+            color: #eee;
+        }
+        h1 { color: #ff9966; }
+        #status {
+            padding: 10px;
+            background: #2a2a3d;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .restaurant {
+            background: #2a2a3d;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #ff9966;
+        }
+        .restaurant b { color: #ffcc99; }
+        button {
+            background: #ff9966;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #2a2a3d;
+            color: #eee;
+            width: 60%;
+            margin-right: 8px;
+        }
+        .taste-chip {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 4px 6px 4px 0;
+            border-radius: 20px;
+            background: #2a2a3d;
+            border: 1px solid #555;
+            cursor: pointer;
+            user-select: none;
+            font-size: 14px;
+        }
+        .taste-chip.selected {
+            background: #ff9966;
+            color: #1e1e2f;
+            border-color: #ff9966;
+            font-weight: bold;
+        }
+        .section-label {
+            margin-top: 20px;
+            margin-bottom: 6px;
+            color: #ffcc99;
+            font-weight: bold;
+        }
+        .match-score {
+            float: right;
+            background: #4caf50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍽️ Restaurant Finder</h1>
+
+    <div class="section-label">📍 Your Location</div>
+    <button onclick="useMyLocation()">📡 Auto-Detect My Location</button>
+    <div style="margin-top:8px;">
+        <input type="text" id="manualLocation" placeholder="Or type a place e.g. Bandra, Mumbai">
+        <button onclick="useManualLocation()">🔍 Search</button>
+    </div>
+
+    <div class="section-label">🍴 Your Taste Preferences</div>
+    <div id="tasteChips">
+        <span class="taste-chip" data-taste="indian">Indian 🍛</span>
+        <span class="taste-chip" data-taste="chinese">Chinese 🥡</span>
+        <span class="taste-chip" data-taste="italian">Italian 🍝</span>
+        <span class="taste-chip" data-taste="vegetarian">Vegetarian 🥦</span>
+        <span class="taste-chip" data-taste="street_food">Street Food 🍢</span>
+        <span class="taste-chip" data-taste="fast_food">Fast Food 🍔</span>
+        <span class="taste-chip" data-taste="cafe">Cafe ☕</span>
+        <span class="taste-chip" data-taste="south_indian">South Indian 🍚</span>
+    </div>
+
+    <div class="section-label">🔎 Search</div>
+    <button onclick="getRestaurants()">🔄 Find Restaurants For Me</button>
+
+    <div id="status" style="margin-top:15px;">Pick a location and taste, then hit search...</div>
+    <div id="results"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
