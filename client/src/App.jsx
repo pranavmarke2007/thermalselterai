@@ -5,9 +5,7 @@ import Layout from './components/Layout'
 const Home = lazy(() => import('./pages/Home'))
 const Simulator = lazy(() => import('./pages/Simulator'))
 const MaterialLibrary = lazy(() => import('./pages/MaterialLibrary'))
-const Viewer3D = lazy(() => import('./pages/Viewer3D'))
 const Comparison = lazy(() => import('./pages/Comparison'))
-const About = lazy(() => import('./pages/About'))
 
 function ScreenLoader() {
   return (
@@ -25,9 +23,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/simulator" element={<Simulator />} />
           <Route path="/materials" element={<MaterialLibrary />} />
-          <Route path="/viewer" element={<Viewer3D />} />
+          <Route path="/viewer" element={<Navigate to="/simulator" replace />} />
           <Route path="/comparison" element={<Comparison />} />
-          <Route path="/about" element={<About />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

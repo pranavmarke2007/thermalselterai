@@ -6,11 +6,7 @@ import {
   Gauge,
   Layers,
   Sun,
-  ShieldAlert,
   ArrowRight,
-  Compass,
-  ThermometerSnowflake,
-  Wind,
   Sparkles,
 } from 'lucide-react'
 import GlassCard from '../components/GlassCard'
@@ -103,7 +99,7 @@ export default function Home() {
               <ArrowRight size={16} />
             </Link>
             <Link
-              to="/viewer"
+              to="/simulator"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 hover:border-[#00D4FF]/40 transition"
             >
               <Box size={16} className="text-[#00D4FF]" />
@@ -171,8 +167,8 @@ export default function Home() {
               <ShelterCanvas inputs={inputs} thermal={thermal} thermalView={false} />
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl border border-white/10 bg-black/60 px-3 py-1.5 backdrop-blur-md text-[11px] text-slate-300">
                 <span>Interactive: Drag to rotate · Scroll to zoom</span>
-                <Link to="/viewer" className="text-[#00D4FF] hover:underline font-medium">
-                  Fullscreen Studio →
+                <Link to="/simulator" className="text-[#00D4FF] hover:underline font-medium">
+                  Open Studio →
                 </Link>
               </div>
             </div>
@@ -245,10 +241,10 @@ export default function Home() {
           </p>
           <div className="pt-2">
             <Link
-              to="/about"
+              to="/simulator"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-[#00D4FF] hover:underline"
             >
-              Read full SIH engineering brief & equations →
+              Open the simulation studio →
             </Link>
           </div>
         </div>

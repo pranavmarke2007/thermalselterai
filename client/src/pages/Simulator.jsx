@@ -149,7 +149,7 @@ export default function Simulator() {
         </div>
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
+      <div className="space-y-5">
         <div className="space-y-5">
           <GlassCard className="overflow-hidden border-[#00D4FF]/20">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[#111827]/90 px-4 py-3">
@@ -165,7 +165,7 @@ export default function Simulator() {
                 onView={(name) => cameraRef.current?.setView(name)}
               />
             </div>
-            <div className="relative h-[480px] w-full bg-[#070B16]">
+            <div className="relative h-[560px] w-full bg-[#070B16]">
               <ShelterCanvas
                 inputs={inputs}
                 thermal={thermal}
@@ -174,14 +174,56 @@ export default function Simulator() {
                 wireframe={wireframe}
                 showData={hasUserInput}
               />
+              <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-2">
+                <span className="telemetry-badge bg-black/60 backdrop-blur-md">
+                  Shape: {inputs.shape.toUpperCase()}
+                </span>
+                <span className="telemetry-badge bg-black/60 backdrop-blur-md text-amber-400 border-amber-400/30">
+                  Azimuth: {inputs.orientation}°
+                </span>
+                <span className="telemetry-badge bg-black/60 backdrop-blur-md text-[#4ADE80] border-[#4ADE80]/30">
+                  Indoor: {formatTemp(thermal.indoorTemperature)}
+                </span>
+                <span className="telemetry-badge bg-black/60 backdrop-blur-md text-rose-400 border-rose-400/30">
+                  Loss: {formatKw(thermal.heatLoss)}
+                </span>
+              </div>
               {!hasUserInput ? (
                 <div className="absolute left-4 top-4 max-w-xs rounded-lg border border-white/10 bg-black/55 px-4 py-3 text-sm text-slate-300 backdrop-blur-md">
                   Outside and inside temperature labels will appear here after you enter data.
                 </div>
               ) : null}
-              <div className="absolute bottom-3 left-3 rounded-lg border border-white/10 bg-black/60 px-3 py-1.5 text-[11px] text-slate-300 backdrop-blur-md">
-                Drag to rotate. Scroll to zoom. Right click to pan.
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-lg border border-white/10 bg-black/60 px-3 py-1.5 text-[11px] text-slate-300 backdrop-blur-md">
+                <span className="font-mono">
+                  Dimensions: {inputs.length}m (L) × {inputs.width}m (W) × {inputs.height}m (H)
+                </span>
+                <span className="hidden sm:inline text-slate-400">
+                  Drag to orbit · Right drag to pan · Scroll to zoom
+                </span>
               </div>
+            </div>
+          </GlassCard>
+
+          <GlassCard className="p-4">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-mono uppercase tracking-[0.16em] text-[#00D4FF]">
+                  Setup
+                </p>
+                <h2 className="text-lg font-semibold text-white">Input panels</h2>
+              </div>
+              <BarChart3 size={20} className="text-slate-400" />
+            </div>
+            <div className="grid gap-3 lg:grid-cols-3">
+              <SetupSection icon={CloudSun} title="Climate and site" defaultOpen>
+                <ClimateForm />
+              </SetupSection>
+              <SetupSection icon={Box} title="Shelter shape">
+                <ShelterForm />
+              </SetupSection>
+              <SetupSection icon={Layers} title="Materials">
+                <MaterialPicker />
+              </SetupSection>
             </div>
           </GlassCard>
 
@@ -287,32 +329,7 @@ export default function Simulator() {
           )}
         </div>
 
-        <aside className="space-y-4 xl:sticky xl:top-24 xl:self-start">
-          <GlassCard className="p-4">
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-xs font-mono uppercase tracking-[0.16em] text-[#00D4FF]">
-                  Setup
-                </p>
-                <h2 className="text-lg font-semibold text-white">Input panels</h2>
-              </div>
-              <BarChart3 size={20} className="text-slate-400" />
-            </div>
-            <div className="space-y-3">
-              <SetupSection icon={CloudSun} title="Climate and site" defaultOpen>
-                <ClimateForm />
-              </SetupSection>
-              <SetupSection icon={Box} title="Shelter shape">
-                <ShelterForm />
-              </SetupSection>
-              <SetupSection icon={Layers} title="Materials">
-                <MaterialPicker />
-              </SetupSection>
-            </div>
-          </GlassCard>
-
-          {hasUserInput ? <RecommendationPanel /> : null}
-        </aside>
+        {hasUserInput ? <RecommendationPanel /> : null}
       </div>
     </div>
   )

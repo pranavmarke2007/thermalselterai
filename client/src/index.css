@@ -4,16 +4,79 @@
   :root {
     color-scheme: dark;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #0B1020;
-    color: #F8FAFC;
+    background-color: #0f1422;
+    color: #e2e8ee;
+  }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
+    background-color: #f5f8fa;
+    color: #17212b;
   }
 
   html,
   body,
   #root {
     min-height: 100%;
-    background-color: #0B1020;
+    background-color: #0d1019;
     overflow-x: hidden;
+  }
+
+  :root[data-theme='light'] body,
+  :root[data-theme='light'] #root {
+    background-color: #f5f8fa;
+    color: #17212b;
+  }
+
+  :root[data-theme='light'] [class*='bg-[#0B1020]'],
+  :root[data-theme='light'] [class*='bg-[#0d1019]'],
+  :root[data-theme='light'] [class*='bg-[#151B2E]'],
+  :root[data-theme='light'] [class*='bg-[#070B16]'],
+  :root[data-theme='light'] [class*='bg-[#111827]'] {
+    background-color: #f5f8fa !important;
+  }
+
+  :root[data-theme='light'] [class~='text-slate-100'],
+  :root[data-theme='light'] [class~='text-white'] {
+    color: #17212b !important;
+  }
+
+  :root[data-theme='light'] [class~='text-slate-300'] {
+    color: #526170 !important;
+  }
+
+  :root[data-theme='light'] [class~='text-slate-200'] {
+    color: #344554 !important;
+  }
+
+  :root[data-theme='light'] [class~='text-slate-400'] {
+    color: #687887 !important;
+  }
+
+  :root[data-theme='light'] [class~='text-slate-500'] {
+    color: #71808e !important;
+  }
+
+  :root[data-theme='light'] [class~='border-white/10'],
+  :root[data-theme='light'] [class~='border-white/20'],
+  :root[data-theme='light'] [class~='border-white/5'] {
+    border-color: rgba(23, 33, 43, 0.12) !important;
+  }
+
+  :root[data-theme='light'] [class~='bg-black/30'],
+  :root[data-theme='light'] [class~='bg-black/20'],
+  :root[data-theme='light'] [class~='bg-black/25'],
+  :root[data-theme='light'] [class~='bg-black/40'],
+  :root[data-theme='light'] [class~='bg-black/60'],
+  :root[data-theme='light'] [class~='bg-black/55'],
+  :root[data-theme='light'] [class~='bg-slate-900/60'],
+  :root[data-theme='light'] [class~='bg-slate-800'] {
+    background-color: rgba(255, 255, 255, 0.72) !important;
+  }
+
+  :root[data-theme='light'] [class~='bg-white/5'],
+  :root[data-theme='light'] [class~='bg-white/10'] {
+    background-color: rgba(23, 33, 43, 0.05) !important;
   }
 
   /* Custom high-tech scrollbar */
@@ -40,11 +103,23 @@
 
 /* Glassmorphism and HUD styling utilities */
 .glass-panel {
-  background: rgba(21, 27, 46, 0.75);
+  background: rgba(20, 25, 40, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+:root[data-theme='light'] .glass-panel,
+:root[data-theme='light'] .glass-panel-glow {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(23, 33, 43, 0.12);
+  box-shadow: 0 8px 24px rgba(36, 54, 68, 0.08);
+}
+
+:root[data-theme='light'] .telemetry-badge {
+  background: rgba(0, 150, 180, 0.1);
+  border-color: rgba(0, 150, 180, 0.28);
 }
 
 .glass-panel-glow {
@@ -57,8 +132,8 @@
 
 .radar-grid {
   background-image: 
-    linear-gradient(to right, rgba(0, 212, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(240, 242, 244, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 251, 251, 0.04) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
