@@ -1,23 +1,22 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Menu, ThermometerSun, X, Sparkles, Box } from 'lucide-react'
+import { Menu, Moon, Sun, ThermometerSun, X } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/simulator', label: 'Simulator' },
-  { to: '/viewer', label: '3D Viewer' },
+  { to: '/simulator', label: 'Studio' },
   { to: '/comparison', label: 'Comparison' },
   { to: '/materials', label: 'Materials' },
-  { to: '/about', label: 'About' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B1020]/75 backdrop-blur-xl shadow-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6">
-        {/* Brand Logo & Telemetry Indicator */}
         <Link to="/" className="flex items-center gap-3 text-white group">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#00D4FF]/20 to-[#4ADE80]/20 border border-[#00D4FF]/40 text-[#00D4FF] shadow-[0_0_15px_rgba(0,212,255,0.2)] group-hover:scale-105 transition">
             <ThermometerSun size={20} />
@@ -27,18 +26,11 @@ export default function Navbar() {
               <span className="text-sm font-extrabold tracking-wide text-white">
                 ThermoShelter<span className="text-[#00D4FF]">AI</span>
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/30 px-2 py-0.5 text-[10px] font-mono font-semibold text-[#00D4FF]">
-                SIH 2024
-              </span>
             </div>
-            <p className="text-[10px] font-mono text-slate-400 hidden sm:block">
-              Cold-Region Passive Habitat Engine
-            </p>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-1.5 md:flex rounded-full border border-white/10 bg-black/30 p-1 backdrop-blur-md">
+        <nav className="hidden items-center gap-1 md:flex">
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
@@ -57,15 +49,16 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop Quick CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Link
-            to="/simulator"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#00D4FF] to-[#38bdf8] px-4 py-2 text-xs font-bold text-[#0B1020] hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition"
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            className="rounded-lg border border-white/10 p-2 text-slate-300 hover:bg-white/10 hover:text-white"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           >
-            <Sparkles size={13} />
-            Launch Studio
-          </Link>
+            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -99,15 +92,6 @@ export default function Navbar() {
               {link.label}
             </NavLink>
           ))}
-          <div className="pt-2">
-            <Link
-              to="/simulator"
-              onClick={() => setOpen(false)}
-              className="block w-full text-center rounded-xl bg-[#00D4FF] py-2.5 text-xs font-bold text-[#0B1020]"
-            >
-              Launch Studio
-            </Link>
-          </div>
         </div>
       ) : null}
     </header>

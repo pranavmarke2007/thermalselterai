@@ -4,6 +4,7 @@ import { Suspense, useEffect, useMemo, useRef } from 'react'
 import ShelterModel from './ShelterModel'
 import Ground from './Ground'
 import { formatTemp } from '../utils/format'
+import { useTheme } from '../context/ThemeContext'
 
 function SunIndicator({ timeOfDay, isThermal }) {
   const isDay = timeOfDay >= 6 && timeOfDay <= 18
@@ -66,6 +67,7 @@ export default function ShelterCanvas({
   showData = true,
 }) {
   const controls = useRef()
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (!cameraRef) return
@@ -91,7 +93,8 @@ export default function ShelterCanvas({
     }
   }, [cameraRef, inputs.height, inputs.length, inputs.width])
 
-  const bgColor = thermalView ? '#0a0512' : '#070B16'
+  const bgColor = thermalView ? '#0a0512' : theme === 'light' ? '#e8f1f4' : '#070B16'
+  const fogColor = thermalView ? bgColor : theme === 'light' ? '#e8f1f4' : bgColor
 
   return (
     <Canvas
@@ -101,12 +104,12 @@ export default function ShelterCanvas({
       className="rounded-2xl"
     >
       <color attach="background" args={[bgColor]} />
-      <fog attach="fog" args={[bgColor, 25, 65]} />
+      <fog attach="fog" args={[fogColor, 25, 65]} />
       <PerspectiveCamera makeDefault position={[12, 7.5, 14]} fov={40} />
 
       {/* Lighting Suite */}
       <ambientLight intensity={thermalView ? 0.35 : 0.5} color={thermalView ? '#c084fc' : '#e2e8f0'} />
-      <hemisphereLight args={['#38bdf8', '#0b1020', 0.4]} />
+      <hemisphereLight args={['#38bdf8', theme === 'light' ? '#cbdde2' : '#0b1020', 0.4]} />
       <SunIndicator timeOfDay={inputs.timeOfDay ?? 13} isThermal={thermalView} />
 
       {/* Cyber Point Accent Fill */}

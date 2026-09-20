@@ -4,7 +4,7 @@ import { useSimulator } from '../context/SimulatorContext'
 import { formatKw, formatPercent, formatTemp } from '../utils/format'
 import EfficiencyChart from '../charts/EfficiencyChart'
 import HeatLossChart from '../charts/HeatLossChart'
-import { Check, Plus, Trash2, ArrowRight, Download, FileText, Sparkles } from 'lucide-react'
+import { Plus, Trash2, ArrowRight, Download, FileText } from 'lucide-react'
 
 export default function Comparison() {
   const {

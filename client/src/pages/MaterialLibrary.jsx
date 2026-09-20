@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import materials from '../data/materials.json'
 import GlassCard from '../components/GlassCard'
-import { Layers, Search, Sparkles, Calculator } from 'lucide-react'
+import { Search } from 'lucide-react'
 
 function MaterialCard({ item, type }) {
   const rVal = item.rValue || (item.thickness / item.conductivity).toFixed(2)

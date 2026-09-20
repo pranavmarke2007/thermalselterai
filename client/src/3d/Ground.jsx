@@ -1,12 +1,16 @@
 import { Grid, ContactShadows, Text } from '@react-three/drei'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Ground() {
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
+
   return (
     <group>
       {/* Ground Substrate Plane */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow>
         <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial color="#090E1C" roughness={0.9} metalness={0.1} />
+        <meshStandardMaterial color={isLight ? '#d7e5e9' : '#090E1C'} roughness={0.9} metalness={0.1} />
       </mesh>
 
       {/* Cyber Engineering Grid */}
@@ -14,10 +18,10 @@ export default function Ground() {
         args={[100, 100]}
         cellSize={1}
         cellThickness={0.7}
-        cellColor="#0e1d38"
+        cellColor={isLight ? '#7d9aa5' : '#0e1d38'}
         sectionSize={5}
         sectionThickness={1.2}
-        sectionColor="#00D4FF"
+        sectionColor={isLight ? '#218da5' : '#00D4FF'}
         fadeDistance={45}
         fadeStrength={1.5}
         infiniteGrid
@@ -64,7 +68,7 @@ export default function Ground() {
       </group>
 
       {/* Dynamic contact shadow beneath shelter */}
-      <ContactShadows opacity={0.55} scale={32} blur={2.2} far={14} color="#000000" position={[0, 0.02, 0]} />
+      <ContactShadows opacity={isLight ? 0.28 : 0.55} scale={32} blur={2.2} far={14} color="#000000" position={[0, 0.02, 0]} />
     </group>
   )
 }

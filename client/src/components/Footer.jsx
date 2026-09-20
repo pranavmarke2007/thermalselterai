@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ThermometerSun, ShieldCheck, Heart } from 'lucide-react'
+import { ThermometerSun } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -21,11 +21,9 @@ export default function Footer() {
           </div>
           <div className="flex flex-wrap gap-6 text-xs text-slate-400">
             <Link to="/" className="hover:text-[#00D4FF] transition">Home</Link>
-            <Link to="/simulator" className="hover:text-[#00D4FF] transition">Simulator</Link>
-            <Link to="/viewer" className="hover:text-[#00D4FF] transition">3D Viewer</Link>
+            <Link to="/simulator" className="hover:text-[#00D4FF] transition">Studio</Link>
             <Link to="/comparison" className="hover:text-[#00D4FF] transition">Comparison</Link>
             <Link to="/materials" className="hover:text-[#00D4FF] transition">Material Lab</Link>
-            <Link to="/about" className="hover:text-[#00D4FF] transition">About & Equations</Link>
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500">
