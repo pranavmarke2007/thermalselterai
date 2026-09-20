@@ -4,7 +4,7 @@ export const defaultSimulatorState = {
   windSpeed: 4.2,
   humidity: 28,
   sunshineHours: 8.5,
-  timeOfDay: 13,
+  timeOfDay: 0,
   length: 8,
   width: 6,
   height: 3.2,

@@ -227,6 +227,8 @@ export default function Simulator() {
             </div>
           </GlassCard>
 
+          {hasUserInput ? <RecommendationPanel /> : null}
+
           {hasUserInput ? (
             <>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -328,8 +330,6 @@ export default function Simulator() {
             <WaitingForInput />
           )}
         </div>
-
-        {hasUserInput ? <RecommendationPanel /> : null}
       </div>
     </div>
   )

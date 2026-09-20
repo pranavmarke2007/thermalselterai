@@ -208,7 +208,9 @@ export function computeThermal(inputs) {
   // Opaque envelope Sol-Air absorption: absorptivity * Area * Irradiance * (U / h_exterior)
   const wallSolAir = solarIrradiance * (areas.wallArea * wall.absorptivity) * (wallU / 20) * facingExposure * dayClarity
   const roofSolAir = solarIrradiance * (areas.roofArea * roof.absorptivity) * (roofU / 20) * 0.85 * dayClarity
-  const solarGain = solarWindowGain + wallSolAir + roofSolAir
+  const rawSolarGain = solarWindowGain + wallSolAir + roofSolAir
+  const solarGainCap = Math.max(uaTotal * 28, 600)
+  const solarGain = Math.min(rawSolarGain, solarGainCap)
 
   // Internal metabolic & appliance heat gain
   const internalHeatGain = occupancy * 80 + 150 // occupants + lighting/electronics
